@@ -12,9 +12,12 @@ class CreditBalanceViewSet(viewsets.ViewSet):
     @action(detail=True, methods=['get'])
     def balance(self, request, idClient=None):
         balance = 0
+        # Si no hay clientes, respondemos con el balance en 0
+        if(Clients.objects.count() == 0):
+            return Response({'balance': balance}, status=200)
         client = Clients.objects.get(id=idClient)
         client_transactions = Transactions.objects.filter(client=client)
-        print(client_transactions, idClient)
+        # Sumamos todas las transacciones del cliente y respondemos
         for transaction in client_transactions:
             amont = transaction.amont
             balance += amont 
@@ -34,9 +37,9 @@ class CreditTopUpViewSet(viewsets.ModelViewSet):
         amont = request.data.get('amont')
         user = get_object_or_404(Clients, id=user_id)
 
-        # Registrar una transacción de deducción de crédito para el uuario
+        # Crea un nuevo registro para la transacción de recarga de crédito
         transaccion = Transactions.objects.create(client=user, amont=amont)
-        # Responder con la confirmación de la transacción y la marca de tiempo
+        # Respondemos con el estandar del serializer
         serializer = self.get_serializer(transaccion)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -54,9 +57,9 @@ class CreditDeductionViewSet(viewsets.ModelViewSet):
         amont = request.data.get('amont')
         user = get_object_or_404(Clients, id=user_id)
 
-        # Registrar una transacción de deducción de crédito para el uuario
+        # Crea un nuevo registro para la transacción de deducción de crédito
         transaccion = Transactions.objects.create(client=user, amont=-amont)
-        # Responder con la confirmación de la transacción y la marca de tiempo
+        # Respondemos con el estandar del serializer
         serializer = self.get_serializer(transaccion)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
