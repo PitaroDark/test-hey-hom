@@ -72,7 +72,7 @@ Aqui el diagrama entidad-relacion para mejor entendimiento
 
 Al igual la API cuenta con su propia documentacion para usarla de manera externa
 #### Documentación API
-![Alt text](docs/docs-api.png?raw=true "DOCS API")
+![Alt text](imgs/docs-api.png?raw=true "DOCS API")
 
 
 ## API Reference
