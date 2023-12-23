@@ -3,8 +3,10 @@ from rest_framework import routers
 from api import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.ClientsViewSet)
-router.register(r'transactions', views.TransactionsViewSet)
+router.register(r'credits/top-up', views.CreditTopUpViewSet, basename='topup')
+router.register(r'credits/deduction', views.CreditDeductionViewSet, basename='deduction')
+router.register(r'clients', views.ClientsViewSet, basename='clients')
+router.register(r'transactions', views.TransactionsViewSet, basename='transactions')
 
 urlpatterns = [
     path('', include(router.urls))

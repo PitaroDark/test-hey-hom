@@ -9,15 +9,7 @@ class Clients(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
 class Transactions(models.Model):
-    TYPE_OPERATION = (
-        ('top-up', 'suma'),
-        ('deduction', 'resta'),
-    )
     client = models.ForeignKey(Clients, on_delete=models.CASCADE)
-    operation = models.CharField(max_length=50, choices=TYPE_OPERATION)
     amont = models.DecimalField(max_digits=10, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
-
-    def sum():
-        pass
     
