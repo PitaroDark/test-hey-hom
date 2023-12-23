@@ -1,0 +1,6 @@
+/.vscode
+/.venv
+
+/server/api/__pycache__
+/server/api/migrations/__pycache__
+/server/project/__pycache__
