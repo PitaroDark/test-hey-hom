@@ -5,12 +5,12 @@ USER root
 
 WORKDIR /usr/test
 
-COPY entrypoint.sh .
-COPY requirements.txt .
-COPY .env .
+COPY entrypoint.sh /usr/test/entrypoint.sh
+COPY requirements.txt /usr/test/requirements.txt
+COPY .env /usr/test/.env
 
-#RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT "entrypoint.sh"
+CMD [ "sh", "entrypoint.sh" ]

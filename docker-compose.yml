@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./server:/usr/test
+      - .:/usr/test
     ports:
       - "${DJANGO_PORT}:${DJANGO_PORT}"
     depends_on:
